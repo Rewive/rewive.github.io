@@ -1,48 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-</head>
+<link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
 <body>
-<div>
-<form name="publish">
-<input type="text" id="text" placeholder="Введи числа через пробел"/>
-<input id="ok" type='button' />
-</form>
-</div>
-<p id="out">Тут будет результат</p>
-<script>
-document.getElementById("ok").onclick = function(event) {
-event.preventDefault()
-getPov(document.getElementById("text").value)
-}
-function getPov(enter) {
-var prebilets = enter.split(" ");
-var bilets = [];
-for(var i = 0;i<prebilets.length;i++) {
-bilets.push(Number(prebilets[i]));
-}
-bilets.sort(function(a, b) {
-return a - b;
-});
-var num = [];
-for(var i = 1;i<bilets[bilets.length-1]+1;i++) {
-num.push(i);
-}
-var pov = [];
-for(var i = 1; i < bilets[bilets.length-1]+1; i++) {
-let num_pov = 0;
-for(var g = 0;g<bilets.length;g++) {
-if(bilets[g]==i) {
-num_pov+=1;
-}
-}
-pov.push(num_pov);
-}
-var msg = ""; for(var i = 0;i<num.length;i++) {
-msg+=(i+1)+" - "+pov[i]+"\n";
-}
-document.getElementById("out").innerText = msg;
-}
-</script>
+    <div>
+        <form name="publish">
+            <input type="text" id="text" placeholder="Введи числа через пробел" />
+            <input id="ok" type='button' class="shine-button">
+        </form>
+    </div>
+    <p id="out">Тут будет результат</p>
+    <script>
+        document.getElementById("ok").onclick = function(event) {
+            event.preventDefault()
+            getPov(document.getElementById("text").value)
+        }
+
+        function getPov(enter) {
+            var prebilets = enter.split(" ");
+            var bilets = [];
+            for (var i = 0; i < prebilets.length; i++) {
+                bilets.push(Number(prebilets[i]));
+            }
+            bilets.sort(function(a, b) {
+                return a - b;
+            });
+            var num = [];
+            for (var i = 1; i < bilets[bilets.length - 1] + 1; i++) {
+                num.push(i);
+            }
+            var pov = [];
+            for (var i = 1; i < bilets[bilets.length - 1] + 1; i++) {
+                let num_pov = 0;
+                for (var g = 0; g < bilets.length; g++) {
+                    if (bilets[g] == i) {
+                        num_pov += 1;
+                    }
+                }
+                pov.push(num_pov);
+            }
+            var msg = "";
+            for (var i = 0; i < num.length; i++) {
+                msg += (i + 1) + " - " + pov[i] + "\n";
+            }
+            document.getElementById("out").innerText = msg;
+        }
+    </script>
 </body>
+
 </html>
