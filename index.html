@@ -50,7 +50,17 @@
             for (var i = 0; i < num.length; i++) {
                 msg += (i + 1) + " - " + pov[i] + "\n";
             }
-            document.getElementById("out").innerText = msg);
+
+              var obj = {
+	item1: msg
+};
+
+var serialObj = JSON.stringify(obj); 
+
+localStorage.setItem("myKey", serialObj); //запишем его в хранилище по ключу "myKey"
+
+var returnObj = JSON.parse(localStorage.getItem("myKey")) //спарсим его обратно объект
+            document.getElementById("out").innerText = localStorage.getItem('myKey');
         }
     </script>
 </body>
