@@ -57,10 +57,10 @@
 
 var serialObj = JSON.stringify(obj); 
 
-localStorage.setItem("myKey", serialObj); //запишем его в хранилище по ключу "myKey"
+localStorage.setItem("myKe", serialObj); //запишем его в хранилище по ключу "myKey"
 
-var returnObj = JSON.parse(localStorage.getItem("myKey")) //спарсим его обратно объект
-            document.getElementById("out").innerText = localStorage.getItem('myKey');
+var returnObj = JSON.parse(localStorage.getItem("myKe")) //спарсим его обратно объект
+            document.getElementById("out").innerText = localStorage.getItem('myKe');
         }
     </script>
 </body>
