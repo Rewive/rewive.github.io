@@ -18,7 +18,7 @@
     </div>
     <p id="out">Тут будет результат</p>
     <script>
-          if(localStorage.getItem('msg')=!undefined) {
+          if(localStorage.getItem('msg')!=undefined) {
 document.getElementById('out').innerText = localStorage.getItem('msg')}
         document.getElementById("ok").onclick = function(event) {
             event.preventDefault()
