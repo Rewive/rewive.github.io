@@ -15,24 +15,63 @@
           <h1 align="center" >Анализ ввода данных</h1>
             <input type="text" id="text" placeholder="Введи числа через пробел" />
             <input id="ok" value="Проверить" type='button' class="shine-button">
-             <hr/>
+              <hr/>
         </form>
     </div>
     <p align="center" id="out">Тут будет результат</p>
   <div>    
-    <a href="https://vk.com/0rewive0"><img src="import { Icon44LogoVk } from '@vkontakte/icons';.jpg" alt="Создатель"></a>
+    <a href="https://vk.com/0rewive0"><img src="https://sun4-12.userapi.com/impg/gzREZKTZlvOQs8YRXHmrS0pZmGLDhFUlIkKJMQ/YI2ibC81Aos.jpg?size=1000x1000&quality=95&sign=20dd6ee5a685255dc2d5e8b3e6b62efd&type=album"  width="32" height="32" alt="Создатель"></a>
+    <p>создатель</p>
     </div>
 
-<input type="checkbox" name="gender" value="1" />Поддержать <br /> 
+<input type="checkbox" id="checkbox" />Поддержать<br /> 
+    
+       <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Спасибо за поддержку! :)
+</div>
   
     <script>
-          if(localStorage.getItem('msg')!=null) {
+     
+} if(localStorage.getItem('msg')!=null) {
 document.getElementById('out').innerText = localStorage.getItem('msg')}
         document.getElementById("ok").onclick = function(event) {
             event.preventDefault()
             getPov(document.getElementById("text").value)
         }
 
+        function getPov(enter) {
+            var prebilets = enter.split(" ");
+            var bilets = [];
+            for (var i = 0; i < prebilets.length; i++) {
+                bilets.push(Number(prebilets[i]));
+            }
+            bilets.sort(function(a, b) {
+                return a - b;
+            });
+            var num = [];
+            for (var i = 1; i < bilets[bilets.length - 1] + 1; i++) {
+                num.push(i);
+            }
+            var pov = [];
+            for (var i = 1; i < bilets[bilets.length - 1] + 1; i++) {
+                let num_pov = 0;
+                for (var g = 0; g < bilets.length; g++) {
+                    if (bilets[g] == i) {
+                        num_pov += 1;
+                    }
+                }
+                pov.push(num_pov);
+            }
+            var msg = "";
+            for (var i = 0; i < num.length; i++) {
+                msg += (i + 1) + " - " + pov[i] + "\n";
+            }
+           document.getElementById("out").innerText = msg;
+             localStorage.setItem('msg', msg) 
+        }
+    </script>
+</body>
         function getPov(enter) {
             var prebilets = enter.split(" ");
             var bilets = [];
