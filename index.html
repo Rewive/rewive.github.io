@@ -16,7 +16,7 @@
     <div>
         <form name="publish" align="center">
           <h1 align="center" >Анализ ввода данных</h1>
-            <input type="text" id="text" placeholder="Введи числа через пробел" />
+            <input type="text" id="text" class="dr" placeholder="Введи числа через пробел" />
             <input id="ok" value="Проверить" type='button' class="shine-button">
               <hr/>
         </form>
@@ -37,9 +37,6 @@
     <script>
     if(localStorage.getItem('msg')!=null) {
 document.getElementById('out').innerText = localStorage.getItem('msg')}
-      
-          if(localStorage.getItem('p')!=null) {
-document.getElementById('pi').innerText = localStorage.getItem('p')}
        
 var user = prompt("Введи своё имя:");
 var p =  ("Добро пожаловать на сайт " + user + "!") 
