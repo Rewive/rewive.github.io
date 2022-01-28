@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "http://rewive.github.io/quad">
+<html>
+<head>
+<meta charset="utf-8" />
+      <title>
+         Корни
+      </title>
+      <link rel="stylesheet" type="text/css" href="style.css" />
+<link type="text/css" rel="stylesheet" href="css/style.css"/>
+</head>
+  <div align="center">
+    <h3>Вычисление корней с округлением</h3>
+  <input type="button" value="Найти корень" id="ok" class="shine-button"/><input id="text" placeholder="Введите число" class="dr"/>
+  <p id="out">тут будет результат</p>
+    </div>
+<body>
+<!-- Start your code here -->
+  <script>
+    document.getElementById("ok").onclick = quad
+      function quad(){    
+var n = document.getElementById("text").value  
+var nrt = Math.sqrt(n);
+  var resultat = (nrt).toFixed(2);
+document.getElementById("out").innerText = ("√" + n + " = " + resultat);
+}
+  </script>
+<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
