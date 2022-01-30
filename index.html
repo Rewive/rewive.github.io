@@ -16,7 +16,7 @@
     <div>
         <form name="publish" align="center">
           <h1 align="center" >Анализ ввода данных</h1>
-            <input type="text" id="text" class="dr" placeholder="Введи числа через пробел" />
+            <input type="text" id="text" class="dr" placeholder="Введи числа через пробел"  />
             <input id="ok" value="Проверить" type='button' class="shine-button">
               <hr/>
         </form>
@@ -34,6 +34,11 @@
         Спасибо за посещение! :)
 </div>
   
+<div id='error_box' style='display: none; border: 1px solid #ff8282; background: #ff5c5c; position: fixed; width: 370px; right: 20px; top: 20px; -webkit-box-shadow: 0px 5px 5px 3px rgba(0, 0, 0, 0.3); box-shadow: 0px 5px 5px 3px rgba(0, 0, 0, 0.3); -webkit-border-radius: 5px; border-radius: 5px; text-align: center;'>
+
+<p id='error_message' style='color: #fff; margin-top: 18px; font-weight: bold; filter: dropshadow(color=#FFFFFF, offx=1, offy=1);'></p>
+</div>    
+    
     <script>
     if(localStorage.getItem('msg')!=null) {
 document.getElementById('out').innerText = localStorage.getItem('msg')}
@@ -76,12 +81,18 @@ document.getElementById("pi").innerText = p;
             }
           }
           else{
-          alert("Вы не можете вводить числа >90!")
+         throw_message("Ошибка! Вы не можете вводить числа >90"); return false;
           }
            document.getElementById("out").innerText = msg;
              localStorage.setItem('msg', msg) 
         }
     </script>
+    <script>
+    function throw_message(str) {
+        $('#error_message').html(str);
+        $("#error_box").fadeIn(100).delay(2000).fadeOut(400);
+    }
+</script>
 </body>
       
 </html>
