@@ -50,7 +50,11 @@ document.getElementById("pi").innerText = p;
             event.preventDefault()
             getPov(document.getElementById("text").value)
         }
-
+    function throw_message(str) {
+        $('#error_message').html(str);
+        $("#error_box").fadeIn(100).delay(2000).fadeOut(400);
+    }
+     
         function getPov(enter) {
             var prebilets = enter.split(" ");
             var bilets = [];
@@ -75,6 +79,7 @@ document.getElementById("pi").innerText = p;
                 pov.push(num_pov);
             }
             var msg = "";
+            var pos = []
             if(i<=91){
             for (var i = 0; i < num.length; i++) {
                 msg += (i + 1) + " - " + pov[i] + "\n";
@@ -87,12 +92,7 @@ document.getElementById("pi").innerText = p;
              localStorage.setItem('msg', msg) 
         }
     </script>
-    <script>
-    function throw_message(str) {
-        $('#error_message').html(str);
-        $("#error_box").fadeIn(100).delay(2000).fadeOut(400);
-    }
-</script>
+    
 </body>
       
 </html>
