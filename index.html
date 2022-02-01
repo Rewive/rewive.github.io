@@ -16,7 +16,7 @@ Rewive
 <div>
 <form name="publish" align="center">
 <h1 align="center" >Анализ ввода данных</h1>
-<input type="text" id="text" class="dr" placeholder="Введи числа через пробел" />
+<input type="text" id="text" class="dr" placeholder="Введи числа через пробел"/>
 <input id="ok" value="Проверить" type='button' class="shine-button">
 <input id="delete" value="Удалить" type='button' class="shine-button">
 <hr/>
@@ -45,6 +45,15 @@ localStorage.setItem('bp', boop)
 localStorage.setItem('ur', user)
 }
 
+document.getElementById('text')
+    .addEventListener('keydown', function(event) {
+        if (event.code === 'Enter')
+        {
+            event.preventDefault();
+            getPov(document.getElementById("text").value.split(" "));
+        }
+});
+
 
 var p = ("Добро пожаловать на сайт, " + localStorage.getItem('ur') + "!")
 document.getElementById("pi").innerText = p;
@@ -52,6 +61,14 @@ document.getElementById("ok").onclick = function(event) {
 event.preventDefault();
 getPov(document.getElementById("text").value.split(" "));
 }
+
+document.getElementById("ok").onkeypress("enter") = function(event) {
+event.preventDefault();
+getPov(document.getElementById("text").value.split(" "));
+}
+
+
+
 document.getElementById("delete").onclick = function(event) {
 localStorage.removeItem('save');
 window.location.reload()
