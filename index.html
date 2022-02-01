@@ -62,13 +62,6 @@ event.preventDefault();
 getPov(document.getElementById("text").value.split(" "));
 }
 
-document.getElementById("ok").onkeypress("enter") = function(event) {
-event.preventDefault();
-getPov(document.getElementById("text").value.split(" "));
-}
-
-
-
 document.getElementById("delete").onclick = function(event) {
 localStorage.removeItem('save');
 window.location.reload()
