@@ -2,119 +2,171 @@
 <html>
 
 <head>
-<meta charset="utf-8" />
-<title>
-Rewive
-</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+    <meta charset="utf-8" />
+    <title>
+        Rewive
+    </title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <header>
-<p align="center" id="pi">Добро пожаловать!</p>
+    <p align="center" id="pi">Добро пожаловать!</p>
 </header>
+
 <body>
-<body align="center">
-<div>
-<form name="publish" align="center">
-<h1 align="center" >Анализ ввода данных</h1>
-<input type="text" id="text" class="dr" placeholder="Введи числа через пробел"/>
-<input id="ok" value="Проверить" type='button' class="shine-button">
-<input id="delete" value="Удалить" type='button' class="shine-button">
-<hr/>
-</form>
-<p align="center" id="out">Тут будет результат</p>
-<div>
-<a href="https://vk.com/0rewive0"><img src="https://sun4-12.userapi.com/impg/gzREZKTZlvOQs8YRXHmrS0pZmGLDhFUlIkKJMQ/YI2ibC81Aos.jpg?size=1000x1000&quality=95&sign=20dd6ee5a685255dc2d5e8b3e6b62efd&type=album" width="32" height="32" alt="создатель"></a>
-<p>создатель</p>
-</div>
 
-<div class="alert">
-<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-Спасибо за посещение! :)
-</div>
+    <body align="center">
+        <div>
+            <form name="publish" align="center">
+                <h1 align="center">Анализ ввода данных</h1>
+                <input type="text" id="text" class="dr" placeholder="Введи числа через пробел" />
+                <input id="ok" value="Проверить" type='button' class="shine-button">
+                <input id="delete" value="Удалить" type='button' class="shine-button">
+                <hr />
+            </form>
+            <p align="center" id="out">Тут будет результат</p>
+            <div>
+                <a href="https://vk.com/0rewive0"><img
+                        src="https://sun4-12.userapi.com/impg/gzREZKTZlvOQs8YRXHmrS0pZmGLDhFUlIkKJMQ/YI2ibC81Aos.jpg?size=1000x1000&quality=95&sign=20dd6ee5a685255dc2d5e8b3e6b62efd&type=album"
+                        width="32" height="32" alt="создатель"></a>
+                <p>создатель</p>
+            </div>
 
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                Спасибо за посещение! :)
+            </div>
 
-<script>
-var bilets = [];
-if(localStorage.getItem('save')!=null) {getPov(localStorage.getItem('save').split(" "));}
+            <h3 align="center">Визуализация данных</h3>
 
-let boop = localStorage.getItem('bp')
-if(boop<2){
-var user = prompt("Введи своё имя:");
-boop += 5
-localStorage.setItem('bp', boop)
-localStorage.setItem('ur', user)
-}
+            <canvas id="myChart"></canvas>
 
-document.getElementById('text')
-    .addEventListener('keydown', function(event) {
-        if (event.code === 'Enter')
-        {
-            event.preventDefault();
-            getPov(document.getElementById("text").value.split(" "));
-        }
-});
+            <script>
 
 
-var p = ("Добро пожаловать на сайт, " + localStorage.getItem('ur') + "!")
-document.getElementById("pi").innerText = p;
-document.getElementById("ok").onclick = function(event) {
-event.preventDefault();
-getPov(document.getElementById("text").value.split(" "));
-}
+                let pos = []
+                let los = []
 
-document.getElementById("delete").onclick = function(event) {
-localStorage.removeItem('save');
-window.location.reload()
-}
-function getPov(enter) {
-var prebilets = enter;
-prebilets.sort(function(a, b) {
-return a - b;
-});
-if(prebilets[prebilets.length-1]>90){ alert("Ошибка! Вы не можете вводить числа >90"); } else {
-for (var i = 0; i < prebilets.length; i++) {
-bilets.push(Number(prebilets[i]));
-}
-bilets.sort(function(a, b) {
-return a - b;
-});
-var num = [];
-for (var i = 0; i < bilets[bilets.length - 1]; i++) {
-num.push(i+1);
-}
-var pov = [];
-for (var i = 0; i < bilets[bilets.length - 1]; i++) {
-let num_pov = 0;
-for (var g = 0; g < bilets.length; g++) {
-if (bilets[g] == i+1) {
-num_pov += 1;
-}
-}
-pov.push(num_pov);
-}
-var msg = "";
-var pos = []
-for (var i = 0; i < num.length; i++) {
-msg += (i+1) + '-' + pov[i] + '\n'
-}
-document.getElementById("out").innerText = msg;
-document.getElementById("text").value = '';
-var saveData = ""
-for(var i = 0;i<bilets.length;i++) {
-saveData+=bilets[i]+' ';
-}
-console.log(saveData)
-localStorage.setItem('save', saveData)
-}
-}
-</script>
+                function graph() {
+                    let ctx = document.getElementById('myChart').getContext('2d')
+                    let chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: los,
+                            datasets: [{
+                                label: 'Частота выпадания',
+                                borderColor: 'rgb(255, 99, 102)',
+                                data: pos
+                            }]
+                        },
+                        options: {}
+                    });
+                }
 
-<footer>
-    <div>
-        <h5>Rewive ©</h5>
-    </div>
-</footer>
 
-</body>
+                function cl() {
+                    los = []
+                    pos = []
+                }
+
+
+                var bilets = [];
+                if (localStorage.getItem('save') != null) { getPov(localStorage.getItem('save').split(" ")); }
+
+                let boop = localStorage.getItem('bp')
+                if (boop < 2) {
+                    var user = prompt("Введи своё имя:");
+                    boop += 5
+                    localStorage.setItem('bp', boop)
+                    localStorage.setItem('ur', user)
+                }
+
+
+
+                document.getElementById('text')
+                    .addEventListener('keydown', function (event) {
+                        if (event.code === 'Enter') {
+                            cl();
+                            event.preventDefault();
+                            getPov(document.getElementById("text").value.split(" "));
+                        }
+                    });
+
+
+
+
+
+                var p = ("Добро пожаловать на сайт, " + localStorage.getItem('ur') + "!")
+                document.getElementById("pi").innerText = p;
+                document.getElementById("ok").onclick = function (event) {
+                    cl();
+                    event.preventDefault();
+                    getPov(document.getElementById("text").value.split(" "));
+                }
+
+                document.getElementById("delete").onclick = function (event) {
+                    localStorage.removeItem('save');
+                    window.location.reload()
+                }
+                function getPov(enter) {
+                    var prebilets = enter;
+                    prebilets.sort(function (a, b) {
+                        return a - b;
+                    });
+                    if (prebilets[prebilets.length - 1] > 90) { alert("Ошибка! Вы не можете вводить числа >90"); } else {
+                        for (var i = 0; i < prebilets.length; i++) {
+                            bilets.push(Number(prebilets[i]));
+                        }
+                        bilets.sort(function (a, b) {
+                            return a - b;
+                        });
+                        var num = [];
+                        for (var i = 0; i < bilets[bilets.length - 1]; i++) {
+                            num.push(i + 1);
+                        }
+                        var pov = [];
+                        for (var i = 0; i < bilets[bilets.length - 1]; i++) {
+                            let num_pov = 0;
+                            for (var g = 0; g < bilets.length; g++) {
+                                if (bilets[g] == i + 1) {
+                                    num_pov += 1;
+                                }
+                            }
+                            pov.push(num_pov);
+                        }
+                        var msg = "";
+                        for (var i = 0; i < num.length; i++) {
+                            msg += (i + 1) + '-' + pov[i] + '\n'
+                            pos.push(pov[i])
+                            los.push(i + 1)
+                            graph();
+                        }
+
+                        document.getElementById("out").innerText = msg;
+                        document.getElementById("text").value = '';
+                        let saveData = []
+                        for (var i = 0; i < bilets.length; i++) {
+                            saveData += bilets[i] + ' ';
+                        }
+                        console.log(saveData)
+                        localStorage.setItem('save', saveData)
+                    }
+                }
+
+
+
+
+
+
+            </script>
+
+
+            <footer>
+                <div>
+                    <h5>Rewive ©</h5>
+                </div>
+            </footer>
+
+    </body>
 
 </html>
